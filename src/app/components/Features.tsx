@@ -1,18 +1,18 @@
 export default function Features() {
     const features = [
       {
-        title: 'Easy Payments',
-        description: 'Streamline rent and fee collection with automated reminders.',
-        icon: '💳',
+        title: 'HUB de funcionalidades',
+        description: 'Tudo o que você precisa para sua gestão em um só lugar.',
+        icon: '🌎',
       },
       {
-        title: 'Maintenance Tracking',
-        description: 'Track and manage maintenance requests seamlessly.',
+        title: 'Serviços Otimizados',
+        description: 'Cada módulo é desenvolvido para facilitar a sua rotina.',
         icon: '🔧',
       },
       {
-        title: 'Community Communication',
-        description: 'Keep residents informed with announcements and updates.',
+        title: 'Transparência',
+        description: 'Facilidade para os condôminos acompanharem a gestão via Dashboards e Relatórios disponíveis para acesso público.',
         icon: '📢',
       },
     ];
@@ -20,7 +20,7 @@ export default function Features() {
     return (
       <section className="py-20 bg-gray-100">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold text-primary mb-12 font-sans">Features</h2>
+          <h2 className="text-3xl font-bold text-primary mb-12 font-sans">Por que ser CondoManager</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div
