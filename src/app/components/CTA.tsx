@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
+import { redirect } from "next/navigation";
 
 export default function CTA() {
   const images = [
@@ -20,11 +21,10 @@ export default function CTA() {
           Junte-se a milhares de condomínios que já gerenciam suas propriedades com facilidade e eficiência.
         </p>
         <div className="flex justify-center gap-4 mb-12">
-          <button className="bg-white text-primary px-8 py-3 shadow-button hover:bg-gray-100 transition duration-300">
-            Teste Gratuitamente
-          </button>
-          <button className="bg-secondary text-white px-8 py-3 shadow-button hover:bg-opacity-90 transition duration-300">
-            Saiba Mais
+          <button className="bg-white text-primary px-8 py-3 shadow-button hover:bg-gray-100 transition duration-300"
+            onClick={() => redirect("/planos")}
+          >
+            Veja nossos planos
           </button>
         </div>
         <div className="relative">

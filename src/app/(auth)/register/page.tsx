@@ -1,8 +1,9 @@
-"use client"; // Marque o componente como Client Component
+"use client";
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/app/lib/supabaseClient";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -12,9 +13,28 @@ export default function Register() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [passwordStrength, setPasswordStrength] = useState({
+    minLength: false,
+    hasUpperCase: false,
+    hasLowerCase: false,
+    hasNumber: false,
+    hasSpecialChar: false,
+  });
   const router = useRouter();
 
-  // Função para validar a senha
+  const validatePasswordRules = (password: string) => ({
+    minLength: password.length >= 8,
+    hasUpperCase: /[A-Z]/.test(password),
+    hasLowerCase: /[a-z]/.test(password),
+    hasNumber: /\d/.test(password),
+    hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+  });
+
+  const handlePasswordChange = (password: string) => {
+    setPassword(password);
+    setPasswordStrength(validatePasswordRules(password));
+  };
+
   const validatePassword = (password: string) => {
     const regex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -22,9 +42,8 @@ export default function Register() {
   };
 
   const handleRegister = async () => {
-    setError(null); // Limpa erros anteriores
+    setError(null);
 
-    // Validações
     if (email !== confirmEmail) {
       setError("Os emails não coincidem.");
       return;
@@ -43,7 +62,6 @@ export default function Register() {
     }
 
     try {
-      // Cadastra o usuário no Supabase
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -58,7 +76,7 @@ export default function Register() {
       if (error) throw error;
 
       alert("Verifique seu email para confirmar o registro!");
-      router.push("/login"); // Redireciona para a página de login
+      router.push("/login");
     } catch (error: any) {
       setError(error.message);
     }
@@ -100,9 +118,49 @@ export default function Register() {
             type="password"
             placeholder="Senha"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => handlePasswordChange(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-lg mb-4"
           />
+          <div className="text-left mb-4">
+            <p className="text-gray-600 text-sm font-medium mb-2">Progresso da senha:</p>
+            <ul>
+              <li
+                className={`${
+                  passwordStrength.minLength ? "text-green-500" : "text-gray-400"
+                }`}
+              >
+                {passwordStrength.minLength ? "✅" : "❌"} Pelo menos 8 caracteres
+              </li>
+              <li
+                className={`${
+                  passwordStrength.hasUpperCase ? "text-green-500" : "text-gray-400"
+                }`}
+              >
+                {passwordStrength.hasUpperCase ? "✅" : "❌"} Uma letra maiúscula
+              </li>
+              <li
+                className={`${
+                  passwordStrength.hasLowerCase ? "text-green-500" : "text-gray-400"
+                }`}
+              >
+                {passwordStrength.hasLowerCase ? "✅" : "❌"} Uma letra minúscula
+              </li>
+              <li
+                className={`${
+                  passwordStrength.hasNumber ? "text-green-500" : "text-gray-400"
+                }`}
+              >
+                {passwordStrength.hasNumber ? "✅" : "❌"} Um número
+              </li>
+              <li
+                className={`${
+                  passwordStrength.hasSpecialChar ? "text-green-500" : "text-gray-400"
+                }`}
+              >
+                {passwordStrength.hasSpecialChar ? "✅" : "❌"} Um caractere especial
+              </li>
+            </ul>
+          </div>
           <input
             type="password"
             placeholder="Confirmar Senha"

@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/app/lib/supabaseClient";
-import Header from "../components/Header";
+import Header from "../../components/Header";
+import Loader from "../../components/Loader"; // Importe o Loader
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -10,6 +11,7 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null);
   const [isForgotPassword, setIsForgotPassword] = useState(false); // Estado para "Esqueci minha senha"
   const [successMessage, setSuccessMessage] = useState<string | null>(null); // Mensagem de sucesso
+  const [isLoading, setIsLoading] = useState(false); // Estado para mostrar o carregamento
   const router = useRouter();
 
   const translateError = (error: any) => {
@@ -30,6 +32,7 @@ export default function Login() {
   };
 
   const handleAuth = async () => {
+    setIsLoading(true); // Ativa o carregamento
     setError(null); // Limpa erros anteriores
     setSuccessMessage(null);
 
@@ -42,9 +45,11 @@ export default function Login() {
 
       if (error) throw error;
 
-      router.push("/dashboard"); // Redireciona após autenticação
+      router.push("/redirect"); // Redireciona após autenticação
     } catch (error: any) {
-      setError(translateError(error)); // Traduz o erro
+      setError(translateError(error)); // Exibe o erro
+    } finally {
+      setIsLoading(false); // Desativa o carregamento
     }
   };
 
@@ -105,7 +110,11 @@ export default function Login() {
                 onClick={handleAuth}
                 className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition duration-300 w-full mb-4"
               >
-                Entrar
+                {isLoading ? (
+                  <Loader /> // Exibe o Loader enquanto está carregando
+                ) : (
+                  "Entrar"
+                )}
               </button>
             </>
           )}
