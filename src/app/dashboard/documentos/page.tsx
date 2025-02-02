@@ -35,7 +35,7 @@ export default function Documentos() {
         updated_at: "2025-01-02T15:00:00Z",
         last_accessed_at: "2025-01-15T12:00:00Z",
         metadata: { descricao: "Regulamento interno do condomínio" },
-        url: "https://exlbbddxndzhqqrmspci.supabase.co/storage/v1/object/public/documentos/Regulamento%20Interno.pdf"
+        url: "https://exlbbddxndzhqqrmspci.supabase.co/storage/v1/object/sign/documentos/Proposta%20TCC%20-%20Vinicius%20Oliveira%20-%20Correcao%20Vinicius.odt?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJkb2N1bWVudG9zL1Byb3Bvc3RhIFRDQyAtIFZpbmljaXVzIE9saXZlaXJhIC0gQ29ycmVjYW8gVmluaWNpdXMub2R0IiwiaWF0IjoxNzM4MTQ1ODg5LCJleHAiOjE3Mzg3NTA2ODl9.es-b4c-neaaccyzol9QbZQnABZFBvQImlgiKmYuW42I"
       },
       {
         id: "2",
@@ -46,7 +46,7 @@ export default function Documentos() {
         updated_at: "2025-01-06T16:00:00Z",
         last_accessed_at: "2025-01-20T09:00:00Z",
         metadata: { descricao: "Manual de uso da piscina e áreas comuns" },
-        url: "https://exlbbddxndzhqqrmspci.supabase.co/storage/v1/object/public/documentos/Manual%20de%20Uso%20da%20Piscina.pdf"
+        url: "https://exlbbddxndzhqqrmspci.supabase.co/storage/v1/object/sign/documentos/PlotSquared-Bukkit-3.823.jar?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJkb2N1bWVudG9zL1Bsb3RTcXVhcmVkLUJ1a2tpdC0zLjgyMy5qYXIiLCJpYXQiOjE3MzgxNDU5NDgsImV4cCI6MTczODc1MDc0OH0.uwau8TzixTBSwsdj2QIaeHviYLVwkKu2TBoPZn8QQgk"
       },
       {
         id: "3",
